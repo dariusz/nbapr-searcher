@@ -5,27 +5,27 @@ let pm = new ParserManager()
 function openResults (result, linkCallback) {
     if (result.links) {
         result.links.forEach(link => {
-            if (pm.get(link.link)) {
-                linkCallback(link.link)
-            }
+            linkCallback(link.link)
         })
     }
 }
 
 function parseRankings(link) {
 
+    if (!link) return false
+
+    console.log("Parsing: " + link)
+
     // espn
     if (link.indexOf("espn.com") > 0) {
         let p = new ParserESPN()
-        let loaded = p.loadHtml(link)
-        if (loaded) {
-            console.log(p.getRankings())
-        }
+        p.loadHtml(link).then(
+            () => console.log(p.getRankings()),
+            () => console.log("Error: Could not load HTML for " + link)
+        )
     }
 
-    return
-
-    return "Not parsed: " + link
+    return false
 }
 
 function search (term, resultsPerPage, timeSpan) {
@@ -33,15 +33,16 @@ function search (term, resultsPerPage, timeSpan) {
     s.resultsPerPage = resultsPerPage
     s.timeSpan = timeSpan
 
+    console.log("Searching: " + term)
+
     s(term, function (err, result) {
         if (err) {
-            console.log(err)
-            return false
+            console.log("Error: " + err)
         }
 
         if (result) {
+            console.log("Results: " + result.links.length)
             openResults(result, parseRankings)
-            return true
         }
     })
 }
