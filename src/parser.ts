@@ -1,6 +1,14 @@
-export class Parser {
+interface Ranking {
+    rank: number
+    team: string
+}
+
+abstract class Parser {
 
     urlSubstring: string
+    createdDate: string
+    html: string
+    $: any
     
     constructor (urlSubstring: string) {
         this.urlSubstring = urlSubstring
@@ -13,17 +21,28 @@ export class Parser {
         return false
     }
 
-    parse(url: string) {
-        return false
+    loadHtml(url: string): Promise<boolean> {
+
+        let r = require('request')
+        console.log("Loading HTML from: " + url)
+    
+        return new Promise ((resolve, reject) => {
+            r(url, function (error, response, html) {
+                if (!error && response.statusCode == 200) {
+                        
+                    // if we're good, load the HTML and parse it
+                    this.html = html
+                    let c = require('cheerio')
+                    this.$ = c.load(this.html)
+                    resolve(true)
+                }
+                reject(false)
+            })
+        })
     }
 
-    getRankings() {
-        return false
-    }
-
-    getDate() {
-        return false
-    }
+    abstract getRankings(): Ranking[]
+    abstract getDate(): string
 }
 
 export class ParserManager {
@@ -46,5 +65,29 @@ export class ParserManager {
             }
         }
         return false
+    }
+}
+
+export class ParserESPN extends Parser {
+
+    constructor () {
+        super("espn.com")
+    }
+
+    getDate(): string {
+        return "01/01/2018"
+    }
+
+    getRankings(): Ranking[] {
+
+        let r = { rank: 1, team: "GSW" }
+        let ra = []
+        ra.push(r)
+        return ra
+
+        this.$('b:contains(". "), strong:contains(". ")').each(function(i) {
+            console.log(i + ": " + this.$(this).text().trim())    
+        })
+        // return true
     }
 }

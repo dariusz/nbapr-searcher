@@ -1,10 +1,6 @@
-import { Parser, ParserManager } from "./parser"
-let pm = new ParserManager()
+import { ParserManager, ParserESPN } from "./parser"
 
-pm.add(new Parser("espn.com"))
-pm.add(new Parser("nbcsports.com"))
-pm.add(new Parser("cbssports.com"))
-pm.add(new Parser("sports.yahoo.com"))
+let pm = new ParserManager()
 
 function openResults (result, linkCallback) {
     if (result.links) {
@@ -16,56 +12,18 @@ function openResults (result, linkCallback) {
     }
 }
 
-function openLink(link) {
-    let r = require('request')
-
-    console.log(link)
-    // return true
-
-    r(link, function (error, response, html) {
-        if (!error && response.statusCode == 200) {
-            console.log(parseRankings(link, html))
-        }
-    })
-    return false
-}
-
-function parseRankings(link, html) {
-    let c = require('cheerio')
-    let $ = c.load(html)
+function parseRankings(link) {
 
     // espn
     if (link.indexOf("espn.com") > 0) {
-        $('b:contains(". "), strong:contains(". ")').each(function(i) {
-            console.log(i + ": " + $(this).text().trim())    
-        })
-        return true
+        let p = new ParserESPN()
+        let loaded = p.loadHtml(link)
+        if (loaded) {
+            console.log(p.getRankings())
+        }
     }
 
-    // nbc
-    if (link.indexOf("nbcsports.com") > 0) {
-        $('h3.story__title:contains("No.")').each(function(i){
-            console.log(i + ": " + $(this).text().trim())
-        })
-        return true
-    }
-
-    // cbs
-    if (link.indexOf("cbssports.com") > 0) {
-        $('td.team span').each(function(i) {
-            let j = i + 1;
-            console.log(j + ": " + $(this).html().trim())
-        })
-        return true
-    }
-
-    // yahoo sports
-    if (link.indexOf("sports.yahoo.com") > 0) {
-        $('strong:contains(". ")').each(function(i){
-            console.log("Yahoo " + (i+1) + ": " + $(this).text().trim())
-        })
-        return true
-    }
+    return
 
     return "Not parsed: " + link
 }
@@ -82,7 +40,7 @@ function search (term, resultsPerPage, timeSpan) {
         }
 
         if (result) {
-            openResults(result, openLink)
+            openResults(result, parseRankings)
             return true
         }
     })
