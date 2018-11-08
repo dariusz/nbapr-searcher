@@ -1,8 +1,9 @@
 import { ParserProvider } from "./parserprovider"
-import { RankingSet } from "./rankings"
+import { RankingSet, Rankings } from "./rankings"
+import { Request } from "./request"
 
 export class SearchResults {
-    loadRankings (results, individualResultHandler) {
+    loadRankings (results) {
 
         let pp = new ParserProvider()
         results.forEach(result => {
@@ -11,31 +12,18 @@ export class SearchResults {
             let url = result.link
             let p = pp.getParser(url)
     
-            // only get the HTML if there's a parser
+            // only get the HTML if there's a valid parser
             if (p) {
-                this.getHtml(url).then(
+                let r = new Request()
+                r.getHtml(url).then(
                     (html) => {
-                        let rs:RankingSet = individualResultHandler(result, html)
+                        let r: Rankings = new Rankings()
+                        let rs: RankingSet = r.loadFromSearchResult(result, html)
                         console.log(rs)
                     },
                     (error) => console.log("Error: " + error)
                 )
             }
-        })
-    }
-    
-    getHtml(url: string): Promise<string> {
-    
-        let r = require('request')
-    
-        return new Promise ((resolve, reject) => {
-            r(url, function (error, response, html) {
-                if (!error && response.statusCode == 200) {
-                    resolve(html)
-                } else {
-                    reject(error)
-                }
-            })
         })
     }
 }
