@@ -17,12 +17,18 @@ export interface RankingSet {
 
 export class Rankings {
 
-    loadFromSearchResult(result, html: string) {
+    loadFromSearchResult(result, html: string): RankingSet {
         if (!result || !result.link) return null
         
         const pp = new ParserProvider()
         const p:Parser = pp.getParser(result.link)
         const r:Ranking[] = p.getRankings(html)
+        if (r.length < 30) {
+            console.log("Warning: Less than 30 results in URL: " + result.link)
+            return null
+        }
+
+        const d:string = p.getDatetime(html)
 
         const rset = {
             rankings: r, 
@@ -30,9 +36,9 @@ export class Rankings {
             title: result.title,
             description: result.description,
             date_created: new Date().toISOString(),
-            date_published: ""
+            date_published: new Date(d).toISOString()
         }
   
-        console.log(rset)
+        return rset
     }
 }

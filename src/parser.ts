@@ -16,9 +16,9 @@ export abstract class Parser {
         return this.parseRankings($)
     }
 
-    getDatetime(html) {
+    getDatetime(html): string {
         if (html.length == 0)
-            return []
+            return ""
 
         let cheerio = require('cheerio')
         let $ = cheerio.load(html)
@@ -37,7 +37,9 @@ export class ParserESPN extends Parser {
         return rs
     }
 
-    parseDatetime(html) { return "" }
+    parseDatetime($): string {
+        return $('meta[name="DC.date.issued"]').attr("content")
+    }
 }
 
 export class ParserNBCS extends Parser {
@@ -51,7 +53,9 @@ export class ParserNBCS extends Parser {
         return rs
     }
 
-    parseDatetime(html) { return "" }
+    parseDatetime($): string {
+        return $('meta[property="og:updated_time"]').attr('content')
+    }
 }
 
 export class ParserCBS extends Parser {
@@ -65,7 +69,9 @@ export class ParserCBS extends Parser {
         return rs
     }
 
-    parseDatetime(html) { return "" }
+    parseDatetime($) {
+        return $('meta[itemprop="datePublished"]').attr('content')
+    }
 }
 
 export class ParserSNews extends Parser {
@@ -83,7 +89,49 @@ export class ParserSNews extends Parser {
         return rs
     }
 
-    parseDatetime(html) { return "" }
+    parseDatetime($): string {
+        return $('meta[property="article:published_time"]').attr('content')
+    }
+}
+
+export class ParserYahoo extends Parser {
+    parseRankings($): Ranking[] {
+        let rs = [], tm = new Teams(), x = 0
+        $('strong:contains(". ")').each(function(i) {
+            let t = $(this).text().trim()
+            t = tm.guess(t)
+            if (t.length > 0) {
+                x++
+                let r = { rank: x, team: t }
+                rs.push(r)
+            }   
+        })
+        return rs
+    }
+
+    parseDatetime($): string {
+        return $('time[itemprop="datePublished"]').attr('datetime')
+    }
+}
+
+export class ParserSI extends Parser {
+    parseRankings($): Ranking[] {
+        let rs = [], tm = new Teams(), x = 30
+        $('strong:contains(". "), strong:contains("Record")').each(function(i) {
+            let t = $(this).text().trim()
+            t = tm.guess(t)
+            if (t.length > 0) {
+                let r = { rank: x, team: t }
+                x--
+                rs.push(r)
+            }   
+        })
+        return rs
+    }
+
+    parseDatetime($): string {
+        return $('div.published-date').text()
+    }
 }
 
 export class ParserBR extends Parser {
@@ -100,6 +148,26 @@ export class ParserBR extends Parser {
         })
         return rs
     }
-    parseDatetime(html) { return "" }
+    parseDatetime($): string {
+        return $('meta[name="pubdate"]').attr('content')
+    }
 }
 
+export class ParserNBA extends Parser {
+    parseRankings($): Ranking[] {
+        let rs = [], tm = new Teams(), x = 1
+        $('.team-name a').each(function(i) {
+            let t = $(this).text().trim()
+            t = tm.guess(t)
+            if (t.length > 0) {
+                let r = { rank: x, team: t }
+                x++
+                rs.push(r)
+            }   
+        })
+        return rs
+    }
+    parseDatetime($): string {
+        return $('meta[name="publishDate"]').attr('content')
+    } 
+}

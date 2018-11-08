@@ -1,7 +1,7 @@
 {
-  "name": "pr-reader",
+  "name": "nbapr-searcher",
   "version": "0.0.1",
-  "description": "Power Rankings Reader",
+  "description": "Power Rankings Searcher and Parser",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,8 +9,10 @@
   "author": "dariusz@grabka.org",
   "license": "ISC",
   "devDependencies": {
+    "@types/lokijs": "^1.5.2",
     "cheerio": "^1.0.0-rc.2",
     "google": "^2.1.0",
+    "lokijs": "^1.5.5",
     "request": "^2.88.0",
     "typescript": "^3.1.6"
   }
