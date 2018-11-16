@@ -10,6 +10,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/lokijs": "^1.5.2",
+    "aws-sdk": "^2.351.0",
     "cheerio": "^1.0.0-rc.2",
     "google": "^2.1.0",
     "lokijs": "^1.5.5",
