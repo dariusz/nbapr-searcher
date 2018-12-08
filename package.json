@@ -7,16 +7,23 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "tsc -w",
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "db:create": "node_modules/db-migrate/bin/db-migrate db:create nbaapr",
+    "db:up": "node_modules/db-migrate/bin/db-migrate up",
+    "db:down": "node_modules/db-migrate/bin/db-migrate down",
+    "db:reset": "node_modules/db-migrate/bin/db-migrate reset"
   },
   "author": "dariusz grabka <dariusz@grabka.org>",
   "license": "ISC",
   "devDependencies": {
-    "@types/lokijs": "1.5.2",
-    "aws-sdk": "2.351.0",
     "cheerio": "1.0.0-rc.2",
     "google": "2.1.0",
     "request": "2.88.0",
     "typescript": "3.1.6"
+  },
+  "dependencies": {
+    "db-migrate": "0.11.4",
+    "db-migrate-sqlite3": "0.3.1",
+    "sqlite3": "4.0.4"
   }
 }
