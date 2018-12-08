@@ -4,8 +4,10 @@ import { Ranking } from "./rankings"
 export abstract class Parser {
     
     constructor () { }
+
     abstract parseRankings(any): Ranking[]
     abstract parseDatetime(any): string
+    abstract getName(): string
     
     getRankings(html): Ranking[] {
         if (html.length == 0)
@@ -40,6 +42,10 @@ export class ParserESPN extends Parser {
     parseDatetime($): string {
         return $('meta[name="DC.date.issued"]').attr("content")
     }
+
+    getName(): string {
+        return "espn"
+    }
 }
 
 export class ParserNBCS extends Parser {
@@ -56,6 +62,10 @@ export class ParserNBCS extends Parser {
     parseDatetime($): string {
         return $('meta[property="og:updated_time"]').attr('content')
     }
+
+    getName(): string {
+        return "nbcsports"
+    }
 }
 
 export class ParserCBS extends Parser {
@@ -71,6 +81,10 @@ export class ParserCBS extends Parser {
 
     parseDatetime($) {
         return $('meta[itemprop="datePublished"]').attr('content')
+    }
+
+    getName(): string {
+        return "cbs"
     }
 }
 
@@ -92,6 +106,10 @@ export class ParserSNews extends Parser {
     parseDatetime($): string {
         return $('meta[property="article:published_time"]').attr('content')
     }
+
+    getName(): string {
+        return "sportingnews"
+    }
 }
 
 export class ParserYahoo extends Parser {
@@ -111,6 +129,10 @@ export class ParserYahoo extends Parser {
 
     parseDatetime($): string {
         return $('time[itemprop="datePublished"]').attr('datetime')
+    }
+
+    getName(): string {
+        return "yahoo"
     }
 }
 
@@ -132,6 +154,10 @@ export class ParserSI extends Parser {
     parseDatetime($): string {
         return $('div.published-date').text()
     }
+
+    getName(): string {
+        return "sportsillustrated"
+    }
 }
 
 export class ParserBR extends Parser {
@@ -150,6 +176,10 @@ export class ParserBR extends Parser {
     }
     parseDatetime($): string {
         return $('meta[name="pubdate"]').attr('content')
+    }
+
+    getName(): string {
+        return "bleacherreport"
     }
 }
 
@@ -170,4 +200,8 @@ export class ParserNBA extends Parser {
     parseDatetime($): string {
         return $('meta[name="publishDate"]').attr('content')
     } 
+
+    getName() : string {
+        return "nba.com"
+    }
 }
