@@ -12,7 +12,8 @@
     "db:up": "node_modules/db-migrate/bin/db-migrate up",
     "db:down": "node_modules/db-migrate/bin/db-migrate down",
     "db:reset": "node_modules/db-migrate/bin/db-migrate reset",
-    "lint": "./node_modules/tslint/bin/tslint src/* migrations/*"
+    "lint": "./node_modules/tslint/bin/tslint src/* migrations/*",
+    "clean": "rm -rf node_modules/ dist/"
   },
   "author": "dariusz grabka <dariusz@grabka.org>",
   "license": "ISC",
