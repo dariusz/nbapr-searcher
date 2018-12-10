@@ -11,14 +11,15 @@
     "db:create-dev": "mkdir db; touch db/dev.db; node_modules/db-migrate/bin/db-migrate db:create nbaapr",
     "db:up": "node_modules/db-migrate/bin/db-migrate up",
     "db:down": "node_modules/db-migrate/bin/db-migrate down",
-    "db:reset": "node_modules/db-migrate/bin/db-migrate reset"
+    "db:reset": "node_modules/db-migrate/bin/db-migrate reset",
+    "lint": "./node_modules/tslint/bin/tslint src/* migrations/*"
   },
   "author": "dariusz grabka <dariusz@grabka.org>",
   "license": "ISC",
   "devDependencies": {
     "db-migrate-sqlite3": "0.3.1",
     "sqlite3": "4.0.4",
-    "tslint": "^5.11.0",
+    "tslint": "5.11.0",
     "typescript": "3.1.6"
   },
   "dependencies": {
