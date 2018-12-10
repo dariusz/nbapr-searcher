@@ -11,5 +11,5 @@ s.search('nba power rankings', 30, 'w')
     },
     (err) => {
       console.log('Error searching: ' + err)
-    }
+    },
   )

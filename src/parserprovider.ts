@@ -1,7 +1,7 @@
 import * as Parsers from './parser'
 
 export class ParserProvider {
-  getParser (url: string): Parsers.Parser {
+  public getParser(url: string): Parsers.Parser {
     if (url.indexOf('nfl/') > 0 || url.indexOf('video/') > 0) {
       return null
     }

@@ -1,22 +1,22 @@
-import { ParserProvider } from './parserprovider'
 import { Parser } from './parser'
+import { ParserProvider } from './parserprovider'
 
-let knex = require('knex')(
+const knex = require('knex')(
   {
     client: 'sqlite3',
     connection: {
-      filename: 'db/dev.db'
-    }
-  }
+      filename: 'db/dev.db',
+    },
+  },
 )
 
-export interface Ranking {
+export interface IRanking {
     rank: number
     team: string
 }
 
-export interface RankingSet {
-    rankings: Ranking[]
+export interface IRankingSet {
+    rankings: IRanking[]
     url: string
     title: string
     description: string
@@ -25,58 +25,59 @@ export interface RankingSet {
     parser: string
 }
 
-export class Rankings {
-  loadFromSearchResult (result, html: string): RankingSet {
-    if (!result || !result.link) return null
+export class IRankings {
+  public loadFromSearchResult(result, html: string): IRankingSet {
+    if (!result || !result.link) { return null }
 
     const pp = new ParserProvider()
-    const p:Parser = pp.getParser(result.link)
-    const r:Ranking[] = p.getRankings(html)
+    const p: Parser = pp.getParser(result.link)
+    const r: IRanking[] = p.getRankings(html)
+
     if (r.length !== 30) {
       console.log('Warning: Not 30 results in URL: ' + result.link)
       return null
     }
 
-    const d:string = p.getDatetime(html)
+    const d: string = p.getDatetime(html)
 
     const rset = {
-      rankings: r,
-      url: result.link,
-      title: result.title,
-      description: result.description,
       date_created: new Date().toISOString(),
       date_published: new Date(d).toISOString(),
-      parser: p.getName()
+      description: result.description,
+      parser: p.getName(),
+      rankings: r,
+      title: result.title,
+      url: result.link,
     }
 
     return rset
   }
 
-  async save (set: RankingSet) {
+  public async save(set: IRankingSet) {
     const obj = {
-      url: set.url,
-      title: set.title,
-      parser: set.parser,
+      date_published: set.date_published,
       description: set.description,
-      date_published: set.date_published
+      parser: set.parser,
+      title: set.title,
+      url: set.url,
     }
 
-    let set_id: number[] = await knex('sets').insert(obj)
+    const setId: number[] = await knex('sets').insert(obj)
 
-    if (set_id) {
-      console.log('Created set ' + set_id[0] + ': ' + obj.url)
+    if (setId) {
+      console.log('Created set ' + setId[0] + ': ' + obj.url)
     }
 
-    set.rankings.forEach(rank => {
-      this.saveRanking(rank, set_id[0])
+    set.rankings.forEach((rank) => {
+      this.saveRanking(rank, setId[0])
     })
   }
 
-  async saveRanking (rank: Ranking, set_id: number) {
+  public async saveRanking(rank: IRanking, setId: number) {
     await knex('rankings').insert({
       rank: rank.rank,
-      set_id: set_id,
-      team: rank.team
+      set_id: setId,
+      team: rank.team,
     })
   }
 }

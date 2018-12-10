@@ -1,5 +1,5 @@
 export class Teams {
-  guess (team: string): string {
+  public guess(team: string): string {
     if (~team.indexOf('aptors')) {
       return 'TOR'
     } else if (~team.indexOf('arriors')) {

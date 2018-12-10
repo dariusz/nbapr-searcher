@@ -1,30 +1,30 @@
 import { ParserProvider } from './parserprovider'
-import { RankingSet, Rankings } from './rankings'
+import { IRankings, IRankingSet } from './rankings'
 import { Request } from './request'
 
 export class SearchResults {
-  loadRankings (results) {
-    let pp = new ParserProvider()
-    results.forEach(result => {
+  public loadRankings(results) {
+    const pp = new ParserProvider()
+    results.forEach((result) => {
       if (!result.link) { return false }
 
-      let url = result.link
-      let parser = pp.getParser(url)
+      const url = result.link
+      const parser = pp.getParser(url)
 
       // only get the HTML if there's a valid parser
       if (parser) {
-        let r = new Request()
+        const r = new Request()
         r.getHtml(url).then(
           (html) => {
-            let r: Rankings = new Rankings()
-            let rs: RankingSet = r.loadFromSearchResult(result, html)
-            if (rs) {
-              r.save(rs).catch((error) => {
+            const rankings: IRankings = new IRankings()
+            const rankingset: IRankingSet = r.loadFromSearchResult(result, html)
+            if (rankingset) {
+              rankings.save(rankingset).catch((error) => {
                 console.log(error)
               })
             }
           },
-          (error) => console.log(error)
+          (error) => console.log(error),
         )
       }
     })
