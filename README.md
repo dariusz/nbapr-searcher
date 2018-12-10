@@ -12,13 +12,17 @@ Install dependencies using ..
 
 `npm run db:create-dev`
 
-.. and migrate / add tables + views ..
+.. migrate / add tables + views ..
 
 `npm run db:up`
 
+.. finally build the app from source ..
+
+`npm run build`
+
 ## Running
 
-The run the service:
+Then run the service:
 
 `npm run start`
 
