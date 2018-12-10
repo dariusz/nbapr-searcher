@@ -14,6 +14,8 @@ export class SearchResults {
       // only get the HTML if there's a valid parser
       if (parser) {
         const r = new Request()
+
+        // parse the rankings and try saving them to db
         r.getHtml(url).then(
           (html) => {
             const rankings: Rankings = new Rankings()

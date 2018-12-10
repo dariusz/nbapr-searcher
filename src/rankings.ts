@@ -73,7 +73,7 @@ export class Rankings {
     })
   }
 
-  public async saveRanking(rank: IRanking, setId: number) {
+  private async saveRanking(rank: IRanking, setId: number) {
     await knex('rankings').insert({
       rank: rank.rank,
       set_id: setId,
