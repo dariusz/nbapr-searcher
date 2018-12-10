@@ -8,20 +8,24 @@ Install dependencies using ..
 
 `npm install`
 
-.. and migrate the database ..
+.. create the SQLite database ..
 
-`npm run db:create`
+`npm run db:create-dev`
+
+.. and migrate / add tables + views ..
+
 `npm run db:up`
 
 ## Running
 
-To run the service:
+The run the service:
 
 `npm run start`
 
 ## Development
 
-This service is written in TypeScript.  It uses SQLite for data storage. A to-do is to use something else for production use.
+This app is written in TypeScript.  It uses SQLite for data storage. A to-do is to use something else for production data storage.
+
 To watch for changes while developing:
 
 `npm run watch`
