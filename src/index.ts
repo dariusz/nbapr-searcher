@@ -1,13 +1,13 @@
 import { Searcher } from './searcher'
 import { SearchResults } from './searchresults'
 
-const s = new Searcher()
-const sr = new SearchResults()
+const searcher = new Searcher()
+const searchresults = new SearchResults()
 
-s.search('nba power rankings', 30, 'w')
+searcher.search('nba power rankings', 30, 'w')
   .then(
     (results) => {
-      sr.loadRankings(results)
+      searchresults.loadRankings(results)
     },
     (err) => {
       console.log('Error searching: ' + err)

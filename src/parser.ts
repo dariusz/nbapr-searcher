@@ -91,7 +91,7 @@ export class SNews extends Parser {
     const rs = []
     const tm = new Teams(); let x = 0
     $('strong').each(function(i) {
-      const t = $(this).text().trim()
+      let t = $(this).text().trim()
       t = tm.guess(t)
       if (t.length > 0) {
         x++
@@ -116,7 +116,7 @@ export class Yahoo extends Parser {
     const rs = []
     const tm = new Teams(); let x = 0
     $('strong:contains(". ")').each(function(i) {
-      const t = $(this).text().trim()
+      let t = $(this).text().trim()
       t = tm.guess(t)
       if (t.length > 0) {
         x++
@@ -141,7 +141,7 @@ export class SI extends Parser {
     const rs = []
     const tm = new Teams(); let x = 30
     $('strong:contains(". "), strong:contains("Record")').each(function(i) {
-      const t = $(this).text().trim()
+      let t = $(this).text().trim()
       t = tm.guess(t)
       if (t.length > 0) {
         const r = { rank: x, team: t }
@@ -166,7 +166,7 @@ export class BR extends Parser {
     const rs = []
     const tm = new Teams(); let x = 30
     $('strong, h1:contains(". ")').each(function(i) {
-      const t = $(this).text().trim()
+      let t = $(this).text().trim()
       t = tm.guess(t)
       if (t.length > 0) {
         const r = { rank: x, team: t }
@@ -190,7 +190,7 @@ export class NBA extends Parser {
     const rs = []
     const tm = new Teams(); let x = 1
     $('.team-name a').each(function(i) {
-      const t = $(this).text().trim()
+      let t = $(this).text().trim()
       t = tm.guess(t)
       if (t.length > 0) {
         const r = { rank: x, team: t }

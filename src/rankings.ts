@@ -25,7 +25,7 @@ export interface IRankingSet {
     parser: string
 }
 
-export class IRankings {
+export class Rankings {
   public loadFromSearchResult(result, html: string): IRankingSet {
     if (!result || !result.link) { return null }
 

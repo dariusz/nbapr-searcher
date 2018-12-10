@@ -1,5 +1,5 @@
 import { ParserProvider } from './parserprovider'
-import { IRankings, IRankingSet } from './rankings'
+import { IRankingSet, Rankings } from './rankings'
 import { Request } from './request'
 
 export class SearchResults {
@@ -16,8 +16,8 @@ export class SearchResults {
         const r = new Request()
         r.getHtml(url).then(
           (html) => {
-            const rankings: IRankings = new IRankings()
-            const rankingset: IRankingSet = r.loadFromSearchResult(result, html)
+            const rankings: Rankings = new Rankings()
+            const rankingset: IRankingSet = rankings.loadFromSearchResult(result, html)
             if (rankingset) {
               rankings.save(rankingset).catch((error) => {
                 console.log(error)

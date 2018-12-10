@@ -1,0 +1,20 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "jsRules": {},
+    "rules": {
+        "semicolon": {
+            "options": ["never"]
+        },
+        "no-bitwise": false,
+        "quotemark": {
+            "options": ["single", "avoid-escape"]
+        },
+        "max-classes-per-file": false,
+        "no-console": false,
+        "no-var-requires": false // todo: turn this back to true
+    },
+    "rulesDirectory": []
+}
