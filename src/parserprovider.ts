@@ -1,31 +1,28 @@
-import { Parser, ParserSI, ParserNBA, ParserESPN, ParserCBS, ParserBR, ParserSNews, ParserNBCS, ParserYahoo } from "./parser"
+import * as Parsers from './parser'
 
 export class ParserProvider {
-    getParser(url: string): Parser {
+    getParser(url: string): Parsers.Parser {
 
-        if (
-            url.indexOf("nfl/") > 0 ||
-            url.indexOf("video/") > 0
-        ) {
+        if (url.indexOf("nfl/") > 0 || url.indexOf("video/") > 0) {
             return null
         }
 
         if (url.indexOf("espn.com") > 0) {
-            return new ParserESPN()
+            return new Parsers.ESPN()
         } else if (url.indexOf("nbcsports.com") > 0) {
-            return new ParserNBCS()
+            return new Parsers.NBCS()
         } else if (url.indexOf("cbssports.com") > 0) {
-            return new ParserCBS()
+            return new Parsers.CBS()
         } else if (url.indexOf("sportingnews.com") > 0) {
-            return new ParserSNews()
+            return new Parsers.SNews()
         } else if (url.indexOf("bleacherreport.com") > 0) {
-            return new ParserBR()
+            return new Parsers.BR()
         } else if (url.indexOf("nba.com/powerrankings/") > 0) {
-            return new ParserNBA()
+            return new Parsers.NBA()
         } else if (url.indexOf("si.com") > 0) {
-            return new ParserSI()
+            return new Parsers.SI()
         } else if (url.indexOf("sports.yahoo.com") > 0) {
-            return new ParserYahoo()
+            return new Parsers.Yahoo()
         }
 
         console.log("Warning: No parser for URL - " + url)

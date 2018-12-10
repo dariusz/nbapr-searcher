@@ -28,7 +28,7 @@ export abstract class Parser {
     }
 }
 
-export class ParserESPN extends Parser {
+export class ESPN extends Parser {
     parseRankings($): Ranking[] {
         let rs = [], tm = new Teams()
         $('b:contains(". "), strong:contains(". ")').each(function(i) {
@@ -48,7 +48,7 @@ export class ParserESPN extends Parser {
     }
 }
 
-export class ParserNBCS extends Parser {
+export class NBCS extends Parser {
     parseRankings($): Ranking[] {
         let rs = [], tm = new Teams()
         $('h3.story__title:contains("No.")').each(function(i){
@@ -68,7 +68,7 @@ export class ParserNBCS extends Parser {
     }
 }
 
-export class ParserCBS extends Parser {
+export class CBS extends Parser {
     parseRankings($): Ranking[] {
         let rs = [], tm = new Teams()
         $('td.team span').each(function(i) {
@@ -88,7 +88,7 @@ export class ParserCBS extends Parser {
     }
 }
 
-export class ParserSNews extends Parser {
+export class SNews extends Parser {
     parseRankings($): Ranking[] {
         let rs = [], tm = new Teams(), x = 0
         $('strong').each(function(i) {
@@ -112,7 +112,7 @@ export class ParserSNews extends Parser {
     }
 }
 
-export class ParserYahoo extends Parser {
+export class Yahoo extends Parser {
     parseRankings($): Ranking[] {
         let rs = [], tm = new Teams(), x = 0
         $('strong:contains(". ")').each(function(i) {
@@ -136,7 +136,7 @@ export class ParserYahoo extends Parser {
     }
 }
 
-export class ParserSI extends Parser {
+export class SI extends Parser {
     parseRankings($): Ranking[] {
         let rs = [], tm = new Teams(), x = 30
         $('strong:contains(". "), strong:contains("Record")').each(function(i) {
@@ -160,7 +160,7 @@ export class ParserSI extends Parser {
     }
 }
 
-export class ParserBR extends Parser {
+export class BR extends Parser {
     parseRankings($): Ranking[] {
         let rs = [], tm = new Teams(), x = 30
         $('strong, h1:contains(". ")').each(function(i) {
@@ -183,7 +183,7 @@ export class ParserBR extends Parser {
     }
 }
 
-export class ParserNBA extends Parser {
+export class NBA extends Parser {
     parseRankings($): Ranking[] {
         let rs = [], tm = new Teams(), x = 1
         $('.team-name a').each(function(i) {

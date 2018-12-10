@@ -21,9 +21,13 @@ export class SearchResults {
                     (html) => {
                         let r: Rankings = new Rankings()
                         let rs: RankingSet = r.loadFromSearchResult(result, html)
-                        console.log(rs)
+                        if (rs) {
+                            r.save(rs).catch((error) => {
+                                console.log(error)
+                            })
+                        }
                     },
-                    (error) => console.log("Error: " + error)
+                    (error) => console.log(error)
                 )
             }
         })

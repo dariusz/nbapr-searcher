@@ -18,7 +18,7 @@ exports.up = function(db) {
   return db.createTable('rankings', {
     columns: {
       id: { type: 'int', primaryKey: true, autoIncrement: true },
-      set: 'int',
+      set_id: 'int',
       rank: 'int',
       team: 'string',
       date_created: { type: 'datetime', defaultValue: new Date().toISOString() }
