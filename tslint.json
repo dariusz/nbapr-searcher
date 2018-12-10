@@ -3,7 +3,17 @@
     "extends": [
         "tslint:recommended"
     ],
-    "jsRules": {},
+    "jsRules": {
+        "semicolon": {
+            "options": ["never"]
+        },
+        "no-bitwise": false,
+        "quotemark": {
+            "options": ["single", "avoid-escape"]
+        },
+        "object-literal-sort-keys": false,
+        "jsdoc-format": false
+    },
     "rules": {
         "semicolon": {
             "options": ["never"]

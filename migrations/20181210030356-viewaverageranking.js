@@ -8,13 +8,13 @@ var seed
   * We receive the dbmigrate dependency from dbmigrate initially.
   * This enables us to not have to rely on NODE_PATH.
   */
-exports.setup = function (options, seedLink) {
+exports.setup = function(options, seedLink) {
   dbm = options.dbmigrate
   type = dbm.dataType
   seed = seedLink
 }
 
-exports.up = function (db) {
+exports.up = function(db) {
   const sql = `
     create view if not exists view_average_rank_2019 as
     select avg(r.rank) as average_rank, r.team
@@ -28,7 +28,7 @@ exports.up = function (db) {
   return db.runSql(sql)
 }
 
-exports.down = function (db) {
+exports.down = function(db) {
   const sql = `
     drop view view_average_rank_2019
   `
@@ -36,5 +36,5 @@ exports.down = function (db) {
 }
 
 exports._meta = {
-  'version': 1
+  'version': 1,
 }
