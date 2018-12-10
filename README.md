@@ -1,4 +1,4 @@
-# NBA APR Searcher
+# NBA Power Rankings Search Service
 
 Searches for 'nba power rankings' on Google and tries to parse the ranks from the results.  Puts the results in a SQLite database for now.
 
@@ -33,3 +33,5 @@ This app is written in TypeScript.  It uses SQLite for data storage. A to-do is 
 To watch for changes while developing:
 
 `npm run watch`
+
+... and check `package.json` for the database migration commands.
