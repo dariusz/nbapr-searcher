@@ -30,6 +30,10 @@ Then run the service:
 
 This app is written in TypeScript.  It uses SQLite for data storage. A to-do is to use something else for production data storage.
 
+It uses a lightly modified version of tslint-recommended for code style, including in the DB migrations:
+
+`npm run lint`
+
 To watch for changes while developing:
 
 `npm run watch`
