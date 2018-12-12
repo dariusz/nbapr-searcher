@@ -1,14 +1,6 @@
+import { knex } from './db'
 import { Parser } from './parser'
 import { ParserProvider } from './parserprovider'
-
-const knex = require('knex')(
-  {
-    client: 'sqlite3',
-    connection: {
-      filename: 'db/dev.db',
-    }
-  }
-)
 
 export interface IRanking {
     rank: number
