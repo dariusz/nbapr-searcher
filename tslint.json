@@ -24,7 +24,8 @@
         },
         "max-classes-per-file": false,
         "no-console": false,
-        "no-var-requires": false // todo: turn this back to true
+        "no-var-requires": false, // todo: turn this back to true
+        "trailing-comma": false
     },
     "rulesDirectory": []
 }

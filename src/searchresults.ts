@@ -26,7 +26,7 @@ export class SearchResults {
               })
             }
           },
-          (error) => console.log(error),
+          (error) => console.log(error)
         )
       }
     })

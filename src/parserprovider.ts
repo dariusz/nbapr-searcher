@@ -6,22 +6,40 @@ export class ParserProvider {
       return null
     }
 
-    if (url.indexOf('espn.com') > 0) {
+    if (url.indexOf('espn.com/') > 0) {
       return new Parsers.ESPN()
-    } else if (url.indexOf('nbcsports.com') > 0) {
+    }
+
+    if (url.indexOf('nbcsports.com') > 0) {
       return new Parsers.NBCS()
-    } else if (url.indexOf('cbssports.com') > 0) {
+    }
+
+    if (url.indexOf('cbssports.com') > 0) {
       return new Parsers.CBS()
-    } else if (url.indexOf('sportingnews.com') > 0) {
-      return new Parsers.SNews()
-    } else if (url.indexOf('bleacherreport.com') > 0) {
+    }
+
+    if (url.indexOf('bleacherreport.com') > 0) {
       return new Parsers.BR()
-    } else if (url.indexOf('nba.com/powerrankings/') > 0) {
+    }
+
+    if (url.indexOf('nba.com/powerrankings/') > 0) {
       return new Parsers.NBA()
-    } else if (url.indexOf('si.com') > 0) {
+    }
+
+    if (url.indexOf('si.com') > 0) {
       return new Parsers.SI()
-    } else if (url.indexOf('sports.yahoo.com') > 0) {
+    }
+
+    if (url.indexOf('sports.yahoo.com') > 0) {
       return new Parsers.Yahoo()
+    }
+
+    if (url.indexOf('thescore.com') > 0) {
+      return new Parsers.TheScore()
+    }
+
+    if (url.indexOf('scout.com') > 0) {
+      return new Parsers.Scout()
     }
 
     console.log('Warning: No parser for URL - ' + url)

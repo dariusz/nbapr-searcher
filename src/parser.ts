@@ -86,31 +86,6 @@ export class CBS extends Parser {
   }
 }
 
-export class SNews extends Parser {
-  public parseRankings($): IRanking[] {
-    const rs = []
-    const tm = new Teams(); let x = 0
-    $('strong').each(function(i) {
-      let t = $(this).text().trim()
-      t = tm.guess(t)
-      if (t.length > 0) {
-        x++
-        const r = { rank: x, team: t }
-        rs.push(r)
-      }
-    })
-    return rs
-  }
-
-  public parseDatetime($): string {
-    return $('meta[property="article:published_time"]').attr('content')
-  }
-
-  public getName(): string {
-    return 'sportingnews'
-  }
-}
-
 export class Yahoo extends Parser {
   public parseRankings($): IRanking[] {
     const rs = []
@@ -176,6 +151,7 @@ export class BR extends Parser {
     })
     return rs
   }
+
   public parseDatetime($): string {
     return $('meta[name="pubdate"]').attr('content')
   }
@@ -200,11 +176,62 @@ export class NBA extends Parser {
     })
     return rs
   }
+
   public parseDatetime($): string {
     return $('meta[name="publishDate"]').attr('content')
   }
 
   public getName(): string {
     return 'nba.com'
+  }
+}
+
+export class TheScore extends Parser {
+  public parseRankings($): IRanking[] {
+    const rs = []
+    const tm = new Teams(); let x = 1
+    $('h3 a').each(function(i) {
+      let t = $(this).text().trim()
+      t = tm.guess(t)
+      if (t.length > 0) {
+        const r = { rank: x, team: t }
+        x++
+        rs.push(r)
+      }
+    })
+    return rs
+  }
+
+  public parseDatetime($): string {
+    return $('div.timeago time').attr('datetime')
+  }
+
+  public getName(): string {
+    return 'thescore'
+  }
+}
+
+export class Scout extends Parser {
+  public parseRankings($): IRanking[] {
+    const rs = []
+    const tm = new Teams(); let x = 1
+    $('tr td a').each(function(i) {
+      let t = $(this).text().trim().toLowerCase()
+      t = tm.guess(t)
+      if (t.length > 0) {
+        const r = { rank: x, team: t }
+        x++
+        rs.push(r)
+      }
+    })
+    return rs
+  }
+
+  public parseDatetime($): string {
+    return $('meta[itemprop=datePublished]').attr('content')
+  }
+
+  public getName(): string {
+    return 'scout'
   }
 }

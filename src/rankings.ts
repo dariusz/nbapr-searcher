@@ -6,8 +6,8 @@ const knex = require('knex')(
     client: 'sqlite3',
     connection: {
       filename: 'db/dev.db',
-    },
-  },
+    }
+  }
 )
 
 export interface IRanking {
@@ -47,7 +47,7 @@ export class Rankings {
       parser: p.getName(),
       rankings: r,
       title: result.title,
-      url: result.link,
+      url: result.link
     }
 
     return rset
@@ -59,7 +59,7 @@ export class Rankings {
       description: set.description,
       parser: set.parser,
       title: set.title,
-      url: set.url,
+      url: set.url
     }
 
     const setId: number[] = await knex('sets').insert(obj)
@@ -77,7 +77,7 @@ export class Rankings {
     await knex('rankings').insert({
       rank: rank.rank,
       set_id: setId,
-      team: rank.team,
+      team: rank.team
     })
   }
 }
