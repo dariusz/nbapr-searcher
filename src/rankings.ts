@@ -1,4 +1,4 @@
-import { knex } from './db'
+import { dbc } from './db'
 import { Parser } from './parser'
 import { ParserProvider } from './parserprovider'
 
@@ -54,7 +54,7 @@ export class Rankings {
       url: set.url
     }
 
-    const setId: number[] = await knex('sets').insert(obj)
+    const setId: number[] = await dbc('sets').insert(obj)
 
     if (setId) {
       console.log('Created set ' + setId[0] + ': ' + obj.url)
@@ -66,7 +66,7 @@ export class Rankings {
   }
 
   private async saveRanking(rank: IRanking, setId: number) {
-    await knex('rankings').insert({
+    await dbc('rankings').insert({
       rank: rank.rank,
       set_id: setId,
       team: rank.team

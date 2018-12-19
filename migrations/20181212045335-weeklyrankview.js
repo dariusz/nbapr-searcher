@@ -16,13 +16,15 @@ exports.setup = function(options, seedLink) {
 
 exports.up = function(db) {
   const sql = `
-    create view view_weekly_rankings as
-      select avg(r.rank) as rank, r.team as team,
-      strftime('%W', s.date_published) as wk, strftime('%Y', s.date_published) as yr
+    create view 'view_weekly_rankings' as
+    select avg(r.rank) as rank, r.team as team,
+      cast(strftime('%W', s.date_published) as number) as wk,
+      cast(strftime('%Y', s.date_published) as number) as yr,
+      count(s.id) as sources
     from rankings r, sets s
     where s.id = r.set_id
     group by r.team, wk, yr
-    order by yr asc, wk asc, rank asc
+    order by yr desc, wk desc, rank asc
   `
   return db.runSql(sql)
 }
