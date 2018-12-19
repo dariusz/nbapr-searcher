@@ -115,7 +115,7 @@ export class SI extends Parser {
   public parseRankings($): IRanking[] {
     const rs = []
     const tm = new Teams(); let x = 30
-    $('strong:contains(". "), strong:contains("Record")').each(function(i) {
+    $('p strong:contains(" | ")').each(function(i) {
       let t = $(this).text().trim()
       t = tm.guess(t)
       if (t.length > 0) {
@@ -124,6 +124,7 @@ export class SI extends Parser {
         rs.push(r)
       }
     })
+    console.log('Results: ' + rs.length)
     return rs
   }
 
