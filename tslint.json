@@ -1,31 +1,41 @@
 {
-    "defaultSeverity": "error",
-    "extends": [
-        "tslint:recommended"
-    ],
-    "jsRules": {
-        "semicolon": {
-            "options": ["never"]
-        },
-        "no-bitwise": false,
-        "quotemark": {
-            "options": ["single", "avoid-escape"]
-        },
-        "object-literal-sort-keys": false,
-        "jsdoc-format": false
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:recommended"
+  ],
+  "jsRules": {
+    "semicolon": {
+      "options": [
+        "never"
+      ]
     },
-    "rules": {
-        "semicolon": {
-            "options": ["never"]
-        },
-        "no-bitwise": false,
-        "quotemark": {
-            "options": ["single", "avoid-escape"]
-        },
-        "max-classes-per-file": false,
-        "no-console": false,
-        "no-var-requires": false, // todo: turn this back to true
-        "trailing-comma": false
+    "no-bitwise": false,
+    "quotemark": {
+      "options": [
+        "single",
+        "avoid-escape"
+      ]
     },
-    "rulesDirectory": []
+    "object-literal-sort-keys": false,
+    "jsdoc-format": false
+  },
+  "rules": {
+    "semicolon": {
+      "options": [
+        "never"
+      ]
+    },
+    "no-bitwise": false,
+    "quotemark": {
+      "options": [
+        "single",
+        "avoid-escape"
+      ]
+    },
+    "max-classes-per-file": false,
+    "no-console": false,
+    "no-var-requires": false, // todo: turn this back to true
+    "trailing-comma": false
+  },
+  "rulesDirectory": []
 }

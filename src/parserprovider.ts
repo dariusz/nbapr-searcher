@@ -10,15 +10,15 @@ export class ParserProvider {
       return new Parsers.ESPN()
     }
 
-    if (url.indexOf('nbcsports.com') > 0) {
+    if (url.indexOf('nbcsports.com/') > 0) {
       return new Parsers.NBCS()
     }
 
-    if (url.indexOf('cbssports.com') > 0) {
+    if (url.indexOf('cbssports.com/') > 0) {
       return new Parsers.CBS()
     }
 
-    if (url.indexOf('bleacherreport.com') > 0) {
+    if (url.indexOf('bleacherreport.com/') > 0) {
       return new Parsers.BR()
     }
 
@@ -26,19 +26,19 @@ export class ParserProvider {
       return new Parsers.NBA()
     }
 
-    if (url.indexOf('si.com') > 0) {
+    if (url.indexOf('si.com/') > 0) {
       return new Parsers.SI()
     }
 
-    if (url.indexOf('sports.yahoo.com') > 0) {
+    if (url.indexOf('sports.yahoo.com/') > 0) {
       return new Parsers.Yahoo()
     }
 
-    if (url.indexOf('thescore.com') > 0) {
+    if (url.indexOf('thescore.com/') > 0) {
       return new Parsers.TheScore()
     }
 
-    if (url.indexOf('scout.com') > 0) {
+    if (url.indexOf('scout.com/') > 0) {
       return new Parsers.Scout()
     }
 

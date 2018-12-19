@@ -3,18 +3,18 @@ import { Parser } from './parser'
 import { ParserProvider } from './parserprovider'
 
 export interface IRanking {
-    rank: number
-    team: string
+  rank: number
+  team: string
 }
 
 export interface IRankingSet {
-    rankings: IRanking[]
-    url: string
-    title: string
-    description: string
-    date_published: string
-    date_created: string
-    parser: string
+  rankings: IRanking[]
+  url: string
+  title: string
+  description: string
+  date_published: string
+  date_created: string
+  parser: string
 }
 
 export class Rankings {
